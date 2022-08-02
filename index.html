@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./css/style.css" />
+    <title>番茄工作法计时器</title>
+  </head>
+  <body>
+    <div id="startPanel" tabindex="0">
+      <p>番茄钟 —— 让你在较短的时间内实现高效的专注。</p>
+      <button tabindex="0" id="newBTN">新建计时工作流</button>
+    </div>
+    <div id="configPanel" class="hidden" tabindex="0">
+      <p>设置你的专注时长、休息时长及预计番茄钟个数：</p>
+      <label for="focusTime">专注时长（分钟）：</label>
+      <input
+        type="number"
+        id="focusTime"
+        min="1"
+        step="5"
+        role="combobox"
+        name="focusTime"
+      />
+      <label for="restTime">休息时长（分钟）：</label>
+      <input
+        type="number"
+        id="restTime"
+        name="restTime"
+        role="combobox"
+        min="1"
+        step="5"
+      />
+      <label for="pomodoroNumber">预计番茄个数：</label>
+      <input
+        type="number"
+        min="1"
+        id="pomodoroNumber"
+        name="pomodoroNumber"
+        role="combobox"
+      />
+      <p id="startBTNArea" style="text-align: center">
+        <button id="startBTN">开始工作</button>
+      </p>
+    </div>
+    <div id="focusPanel" class="hidden"></div>
+    <div id="summaryPanel" class="hidden"></div>
+    <script src="./js/ui.js"></script>
+    <script src="./js/timer.js"></script>
+    <script src="./js/main.js"></script>
+  </body>
+</html>
