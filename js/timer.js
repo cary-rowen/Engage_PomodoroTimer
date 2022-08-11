@@ -4,9 +4,11 @@ function setStatus(description) {
   let statusDiv = document.getElementById("status");
   statusDiv.textContent = description;
 }
+
 function toMS(minutes) {
   return minutes * 60 * 1000;
 }
+
 function toHMS(ms) {
   return {
     hours: Math.floor(ms / 1000 / 60 / 60),
@@ -14,6 +16,7 @@ function toHMS(ms) {
     seconds: Math.floor((ms / 1000) % 60),
   };
 }
+
 function executeTimingCycle() {
   isAbsorbing = !isAbsorbing;
   if (isAbsorbing) {
