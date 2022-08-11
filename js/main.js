@@ -25,9 +25,9 @@ newBTN.addEventListener("click", () => {
 });
 let startBTN = document.querySelector("#startBTN");
 startBTN.addEventListener("click", () => {
-  totalPomodoro = +document.querySelector("#pomodoroNumber").value;
-  absorbTime = toMS(+document.querySelector("#absorbTime").value);
-  restTime = toMS(+document.querySelector("#restTime").value);
+  totalPomodoro = document.querySelector("#pomodoroNumber").value;
+  absorbTime = toMS(document.querySelector("#absorbTime").value);
+  restTime = toMS(document.querySelector("#restTime").value);
   executeTimingCycle();
   showOrHide("configPanel", "hide");
   countdownTimerId = setInterval(() => {
