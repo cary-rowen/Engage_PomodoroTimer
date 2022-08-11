@@ -10,8 +10,8 @@ function toMS(minutes) {
 function toHMS(ms) {
   return {
     hours: Math.floor(ms / 1000 / 60 / 60),
-    minutes: Math.floor(ms / 1000 / 60),
-    seconds: Math.floor(ms / 1000),
+    minutes: Math.floor(((ms / 1000) % 3600) / 60),
+    seconds: Math.floor((ms / 1000) % 60),
   };
 }
 function executeTimingCycle() {
