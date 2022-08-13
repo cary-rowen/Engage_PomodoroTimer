@@ -14,34 +14,40 @@
     </div>
     <div id="configPanel" class="hidden" tabindex="0">
       <p>设置你的专注时长、休息时长及预计番茄钟个数：</p>
-      <label for="absorbTime">专注时长（分钟）：</label>
-      <input
-        type="number"
-        id="absorbTime"
-        name="absorbTime"
-        min="5"
-        value="25"
-        step="5"
-        role="combobox"
-      />
-      <label for="restTime">休息时长（分钟）：</label>
-      <input
-        type="number"
-        id="restTime"
-        name="restTime"
-        min="1"
-        value="5"
-        role="combobox"
-      />
-      <label for="pomodoroNumber">预计番茄个数：</label>
-      <input
-        type="number"
-        id="pomodoroNumber"
-        name="pomodoroNumber"
-        min="1"
-        value="1"
-        role="combobox"
-      />
+      <div>
+        <label for="absorbTime">专注时长（分钟）：</label>
+        <input
+          type="number"
+          id="absorbTime"
+          name="absorbTime"
+          min="5"
+          value="25"
+          step="5"
+          role="combobox"
+        />
+      </div>
+      <div>
+        <label for="restTime">休息时长（分钟）：</label>
+        <input
+          type="number"
+          id="restTime"
+          name="restTime"
+          min="1"
+          value="5"
+          role="combobox"
+        />
+      </div>
+      <div>
+        <label for="pomodoroNumber">预计番茄个数：</label>
+        <input
+          type="number"
+          id="pomodoroNumber"
+          name="pomodoroNumber"
+          min="1"
+          value="1"
+          role="combobox"
+        />
+      </div>
       <p id="startBTNArea" style="text-align: center">
         <button id="startBTN">开始工作</button>
       </p>
@@ -53,7 +59,7 @@
       <h3 id="remainingPomodoro">剩余番茄个数：</h3>
       <button id="stopBTN">停止</button>
     </div>
-    
+
     <script src="./js/ui.js"></script>
     <script src="./js/timer.js"></script>
     <script src="./js/main.js"></script>
