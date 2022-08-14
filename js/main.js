@@ -10,6 +10,11 @@ configPanel.addEventListener("input", (e) => {
 });
 let newBTN = document.querySelector("#newBTN");
 newBTN.addEventListener("click", () => operateUI("#configPanel", showPanel));
+let backBTN = document.querySelector("#backBTN");
+backBTN.addEventListener("click", () => {
+  newBTN.click();
+  setStatus("设置番茄任务");
+});
 let startBTN = document.querySelector("#startBTN");
 startBTN.addEventListener("click", () => {
   let isAbsorbing = false;
