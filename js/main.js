@@ -10,6 +10,11 @@ configPanel.addEventListener("input", (e) => {
 });
 let newBTN = document.querySelector("#newBTN");
 newBTN.addEventListener("click", () => operateUI("#configPanel", showPanel));
+let backBTN = document.querySelector("#backBTN");
+backBTN.addEventListener("click", () => {
+  newBTN.click();
+  setStatus("设置番茄任务");
+});
 let startBTN = document.querySelector("#startBTN");
 startBTN.addEventListener("click", () => {
   let isAbsorbing = false;
@@ -69,7 +74,7 @@ startBTN.addEventListener("click", () => {
     summaryContentControl.textContent = `你在 \
     ${totalTime.hours} 小时， ${totalTime.minutes} 分钟内完成了 \
     ${totalPomodoro} 个番茄钟，\
-    让将来的你感谢现在努力的自己，加油！`;
+    将来的你会感谢现在努力的自己，加油！`;
     operateUI("#summaryPanel", showPanel);
   }
 });
