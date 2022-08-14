@@ -66,7 +66,7 @@ function showPanel(elements) {
   let panels = document.querySelectorAll("[id*=Panel]");
   panels.forEach((panel) => {
     if (panel.id == elements[0].id) {
-      panel.style.display = "";
+      panel.style.display = "inline";
     } else {
       panel.style.display = "none";
     }
