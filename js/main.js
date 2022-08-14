@@ -33,12 +33,14 @@ startBTN.addEventListener("click", () => {
     isAbsorbing = !isAbsorbing;
     if (isAbsorbing) {
       setStatus("专注中");
+      audioCues("start");
       finishTime = absorbTime + Date.now();
       setTimeout(executeTimingCycle, absorbTime);
     } else {
       finishTime = restTime + Date.now();
       finishedPomodoro++;
       setStatus("休息中");
+      audioCues("rest");
       if (finishedPomodoro == totalPomodoro) {
         clearInterval(countdownTimerId);
         setStatus("已完成");
@@ -65,11 +67,12 @@ startBTN.addEventListener("click", () => {
 
   function showSummary() {
     let totalTime = toHMS(stopTime - startTime);
+audioCues("finish");
     summaryCaptionControl.textContent = "好棒呀👍";
     summaryContentControl.textContent = `你在 \
     ${totalTime.hours} 小时， ${totalTime.minutes} 分钟内完成了 \
     ${totalPomodoro} 个番茄钟，\
-    让将来的你感谢现在努力的自己，加油！`;
+    将来的你会感谢现在努力的自己，加油！`;
     operateUI("#summaryPanel", showPanel);
   }
 });
