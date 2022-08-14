@@ -16,22 +16,3 @@ function toHMS(ms) {
     seconds: Math.floor((ms / 1000) % 60),
   };
 }
-
-function executeTimingCycle() {
-  isAbsorbing = !isAbsorbing;
-  if (isAbsorbing) {
-    setStatus("专注中");
-    finishTime = absorbTime + Date.now();
-    setTimeout(executeTimingCycle, absorbTime);
-  } else {
-    finishTime = restTime + Date.now();
-    finishedPomodoro++;
-    setStatus("休息中");
-    if (finishedPomodoro == totalPomodoro) {
-      clearInterval(countdownTimerId);
-      //showSummary();
-      return;
-    }
-    setTimeout(executeTimingCycle, restTime);
-  }
-}
