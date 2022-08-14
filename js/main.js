@@ -9,10 +9,7 @@ configPanel.addEventListener("input", (e) => {
   }
 });
 let newBTN = document.querySelector("#newBTN");
-newBTN.addEventListener("click", () => {
-  "startPanel", "hide";
-  showOrHide("configPanel", "show");
-});
+newBTN.addEventListener("click", () => operateUI("#configPanel", showPanel));
 let startBTN = document.querySelector("#startBTN");
 startBTN.addEventListener("click", () => {
   let isAbsorbing = false;
@@ -52,7 +49,7 @@ startBTN.addEventListener("click", () => {
     }
   }
   executeTimingCycle();
-  showOrHide("configPanel", "hide");
+
   countdownTimerId = setInterval(() => {
     let timeLeft = toHMS(finishTime - Date.now());
     let pomodoroLeft = totalPomodoro - finishedPomodoro;
@@ -63,5 +60,15 @@ startBTN.addEventListener("click", () => {
     timeRemainControl.textContent = `剩余时间：\
     ${timeLeft.hours} 时 ${timeLeft.minutes} 分 ${timeLeft.seconds} 秒`;
   }, 1000);
-  showOrHide("absorbPanel", "show");
+  operateUI("#absorbPanel", showPanel);
 });
+function showPanel(elements) {
+  let panels = document.querySelectorAll("[id*=Panel]");
+  panels.forEach((panel) => {
+    if (panel.id == elements[0].id) {
+      panel.style.display = "";
+    } else {
+      panel.style.display = "none";
+    }
+  });
+}
