@@ -1,13 +1,3 @@
-let isAbsorbing = false;
-let finishTime = 0;
-let finishedPomodoro = 0;
-let totalPomodoro;
-let absorbTime;
-let restTime;
-let timeRemainControl = document.querySelector("#remainingTime");
-let finishedPomodoroControl = document.querySelector("#finishedPomodoro");
-let remainPomodoroControl = document.querySelector("#remainingPomodoro");
-let countdownTimerId = null;
 // 强制使用整数配置
 let configPanel = document.querySelector("#configPanel");
 configPanel.addEventListener("input", (e) => {
@@ -20,14 +10,47 @@ configPanel.addEventListener("input", (e) => {
 });
 let newBTN = document.querySelector("#newBTN");
 newBTN.addEventListener("click", () => {
-  showOrHide("startPanel", "hide");
+  "startPanel", "hide";
   showOrHide("configPanel", "show");
 });
 let startBTN = document.querySelector("#startBTN");
 startBTN.addEventListener("click", () => {
+  let isAbsorbing = false;
+  let finishTime = 0;
+  let finishedPomodoro = 0;
+  let totalPomodoro;
+  let absorbTime;
+  let restTime;
+  let timeRemainControl = document.querySelector("#remainingTime");
+  let finishedPomodoroControl = document.querySelector("#finishedPomodoro");
+  let remainPomodoroControl = document.querySelector("#remainingPomodoro");
+  let countdownTimerId = null;
+  let startTime = Date.now();
+  let stopTime;
   totalPomodoro = document.querySelector("#pomodoroNumber").value;
   absorbTime = toMS(document.querySelector("#absorbTime").value);
   restTime = toMS(document.querySelector("#restTime").value);
+  function executeTimingCycle() {
+    isAbsorbing = !isAbsorbing;
+    if (isAbsorbing) {
+      setStatus("专注中");
+      finishTime = absorbTime + Date.now();
+      setTimeout(executeTimingCycle, absorbTime);
+    } else {
+      finishTime = restTime + Date.now();
+      finishedPomodoro++;
+      setStatus("休息中");
+      if (finishedPomodoro == totalPomodoro) {
+        clearInterval(countdownTimerId);
+        setStatus("已完成");
+        stopTime = Date.now();
+
+        //showSummary();
+        return;
+      }
+      setTimeout(executeTimingCycle, restTime);
+    }
+  }
   executeTimingCycle();
   showOrHide("configPanel", "hide");
   countdownTimerId = setInterval(() => {
