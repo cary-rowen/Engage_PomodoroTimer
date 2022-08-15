@@ -26,12 +26,27 @@
 您可以点击对应的播放按钮预览不同的音频提示。
 
 #### 开始番茄计时
+
+
+https://user-images.githubusercontent.com/21048245/184646916-5a15353a-c6e5-4c12-a11f-c22b9b68e769.mp4
+
+
 <audio src="https://raw.githubusercontent.com/cary-rowen/Engage_PomodoroTimer/master/audio/finish.wav" controls></audio>
 
 #### 开始休息
+
+
+https://user-images.githubusercontent.com/21048245/184646814-1f42bd85-c7e2-4ea3-af1d-ae1d612cbc88.mp4
+
+
 <audio src="https://raw.githubusercontent.com/cary-rowen/Engage_PomodoroTimer/master/audio/rest.wav" controls></audio>
 
 #### 完成或中途停止番茄钟
+
+
+https://user-images.githubusercontent.com/21048245/184646640-d29a5482-885c-4d5e-b1eb-534ad0fcd857.mp4
+
+
 <audio src="https://raw.githubusercontent.com/cary-rowen/Engage_PomodoroTimer/master/audio/finish.wav" controls></audio>
 
 
