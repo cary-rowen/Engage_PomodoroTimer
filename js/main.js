@@ -8,15 +8,27 @@ configPanel.addEventListener("input", (e) => {
     //此处 edge 和 Firefox 行为有不同，待讨论
   }
 });
+
 let newBTN = document.querySelector("#newBTN");
 newBTN.addEventListener("click", () => operateUI("#configPanel", showPanel));
+
 let backBTN = document.querySelector("#backBTN");
 backBTN.addEventListener("click", () => {
   newBTN.click();
   setStatus("设置番茄任务");
 });
+
 let startBTN = document.querySelector("#startBTN");
 startBTN.addEventListener("click", () => {
+  
+  let stopBTN = document.querySelector("#stopBTN");
+  stopBTN.addEventListener("click", () => {
+    if (!confirm("确定要停止该番茄钟吗？")) return;
+    clearInterval(countdownTimerId);
+    stopTime = Date.now();
+    showSummary(true);
+  });
+
   let isAbsorbing = false;
   let finishTime = 0;
   let finishedPomodoro = 0;
@@ -34,6 +46,7 @@ startBTN.addEventListener("click", () => {
   totalPomodoro = document.querySelector("#pomodoroNumber").value;
   absorbTime = toMS(document.querySelector("#absorbTime").value);
   restTime = toMS(document.querySelector("#restTime").value);
+
   function executeTimingCycle() {
     isAbsorbing = !isAbsorbing;
     if (isAbsorbing) {
@@ -48,9 +61,8 @@ startBTN.addEventListener("click", () => {
       audioCues("rest");
       if (finishedPomodoro == totalPomodoro) {
         clearInterval(countdownTimerId);
-        setStatus("已完成");
         stopTime = Date.now();
-        showSummary();
+        showSummary(false);
         return;
       }
       setTimeout(executeTimingCycle, restTime);
@@ -70,14 +82,27 @@ startBTN.addEventListener("click", () => {
   }, 1000);
   operateUI("#absorbPanel", showPanel);
 
-  function showSummary() {
+  function showSummary(isStop) {
     let totalTime = toHMS(stopTime - startTime);
-audioCues("finish");
-    summaryCaptionControl.textContent = "好棒呀👍";
-    summaryContentControl.textContent = `你在 \
+    audioCues("finish");
+    let caption, content;
+    if (isStop) {
+      setStatus("已停止");
+      caption = "啊哦！番茄钟提前结束😼";
+      content = `你在： \
+      ${totalTime.hours} 小时， ${totalTime.minutes} 分钟 ${totalTime.seconds} 秒内完成了 \
+      ${finishedPomodoro} 个番茄钟，\
+      每天进步一点点，期待下一次的相逢。`;
+    } else {
+      setStatus("已完成");
+      caption = "好棒呀👍";
+      content = `你在 \
     ${totalTime.hours} 小时， ${totalTime.minutes} 分钟内完成了 \
-    ${totalPomodoro} 个番茄钟，\
+    ${finishedPomodoro} 个番茄钟，\
     将来的你会感谢现在努力的自己，加油！`;
+    }
+    summaryCaptionControl.textContent = caption;
+    summaryContentControl.textContent = content;
     operateUI("#summaryPanel", showPanel);
   }
 });
