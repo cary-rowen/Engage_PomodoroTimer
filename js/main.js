@@ -72,7 +72,7 @@ startBTN.addEventListener("click", () => {
 
   function showSummary() {
     let totalTime = toHMS(stopTime - startTime);
-audioCues("finish");
+    audioCues("finish");
     summaryCaptionControl.textContent = "好棒呀👍";
     summaryContentControl.textContent = `你在 \
     ${totalTime.hours} 小时， ${totalTime.minutes} 分钟内完成了 \
