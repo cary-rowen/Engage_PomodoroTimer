@@ -20,7 +20,6 @@ backBTN.addEventListener("click", () => {
 
 let startBTN = document.querySelector("#startBTN");
 startBTN.addEventListener("click", () => {
-  
   let stopBTN = document.querySelector("#stopBTN");
   stopBTN.addEventListener("click", () => {
     if (!confirm("确定要停止该番茄钟吗？")) return;
@@ -30,11 +29,7 @@ startBTN.addEventListener("click", () => {
   });
 
   let isAbsorbing = false;
-  let finishTime = 0;
   let finishedPomodoro = 0;
-  let totalPomodoro;
-  let absorbTime;
-  let restTime;
   let timeRemainControl = document.querySelector("#remainingTime");
   let finishedPomodoroControl = document.querySelector("#finishedPomodoro");
   let remainPomodoroControl = document.querySelector("#remainingPomodoro");
@@ -43,9 +38,10 @@ startBTN.addEventListener("click", () => {
   let countdownTimerId = null;
   let startTime = Date.now();
   let stopTime;
-  totalPomodoro = document.querySelector("#pomodoroNumber").value;
-  absorbTime = toMS(document.querySelector("#absorbTime").value);
-  restTime = toMS(document.querySelector("#restTime").value);
+  let totalPomodoro = document.querySelector("#pomodoroNumber").value;
+  let absorbTime = toMS(document.querySelector("#absorbTime").value);
+  let finishTime = absorbTime + Date.now();
+  let restTime = toMS(document.querySelector("#restTime").value);
 
   function executeTimingCycle() {
     isAbsorbing = !isAbsorbing;
@@ -58,13 +54,13 @@ startBTN.addEventListener("click", () => {
       finishTime = restTime + Date.now();
       finishedPomodoro++;
       setStatus("休息中");
-      audioCues("rest");
       if (finishedPomodoro == totalPomodoro) {
         clearInterval(countdownTimerId);
         stopTime = Date.now();
         showSummary(false);
         return;
       }
+      audioCues("rest");
       setTimeout(executeTimingCycle, restTime);
     }
   }
@@ -72,6 +68,7 @@ startBTN.addEventListener("click", () => {
 
   countdownTimerId = setInterval(() => {
     let timeLeft = toHMS(finishTime - Date.now());
+    timeLeft = timeLeft < 0 ? 0 : timeLeft;
     let pomodoroLeft = totalPomodoro - finishedPomodoro;
     remainPomodoroControl.textContent = `剩余番茄个数：\
     ${pomodoroLeft}`;
