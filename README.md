@@ -31,7 +31,7 @@
 https://user-images.githubusercontent.com/21048245/184646916-5a15353a-c6e5-4c12-a11f-c22b9b68e769.mp4
 
 
-<audio src="https://raw.githubusercontent.com/cary-rowen/Engage_PomodoroTimer/master/audio/finish.wav" controls></audio>
+<audio src="https://raw.githubusercontent.com/cary-rowen/Engage_PomodoroTimer/master/audio/start.wav" controls></audio>
 
 #### 开始休息
 
