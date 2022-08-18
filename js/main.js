@@ -21,13 +21,13 @@ backBTN.addEventListener("click", () => {
 let startBTN = document.querySelector("#startBTN");
 startBTN.addEventListener("click", () => {
   let stopBTN = document.querySelector("#stopBTN");
-  stopBTN.addEventListener("click", () => {
+  stopBTN.onclick = () => {
     if (!confirm("确定要停止该番茄钟吗？")) return;
     clearInterval(countdownTimerId);
+    clearTimeout(cycleTimerId);
     stopTime = Date.now();
     showSummary(true);
-  });
-
+  };
   let isAbsorbing = false;
   let finishedPomodoro = 0;
   let timeRemainControl = document.querySelector("#remainingTime");
@@ -42,6 +42,7 @@ startBTN.addEventListener("click", () => {
   let absorbTime = toMS(document.querySelector("#absorbTime").value);
   let finishTime = absorbTime + Date.now();
   let restTime = toMS(document.querySelector("#restTime").value);
+  let cycleTimerId;
 
   function executeTimingCycle() {
     isAbsorbing = !isAbsorbing;
@@ -49,7 +50,7 @@ startBTN.addEventListener("click", () => {
       setStatus("专注中");
       audioCues("start");
       finishTime = absorbTime + Date.now();
-      setTimeout(executeTimingCycle, absorbTime);
+      cycleTimerId = setTimeout(executeTimingCycle, absorbTime);
     } else {
       finishTime = restTime + Date.now();
       finishedPomodoro++;
@@ -61,7 +62,7 @@ startBTN.addEventListener("click", () => {
         return;
       }
       audioCues("rest");
-      setTimeout(executeTimingCycle, restTime);
+      cycleTimerId = setTimeout(executeTimingCycle, restTime);
     }
   }
   executeTimingCycle();
