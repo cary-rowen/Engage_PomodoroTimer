@@ -2,7 +2,7 @@
 let configPanel = document.querySelector("#configPanel");
 configPanel.addEventListener("input", (e) => {
   //alert(e.target.tagName);
-  if (e.target.value) {
+  if (e.target.type == "number") {
     e.target.value = e.target.value.replace(/[^\d]/g, "");
     //console.log(e.target.value);
     //此处 edge 和 Firefox 行为有不同，待讨论
@@ -10,13 +10,13 @@ configPanel.addEventListener("input", (e) => {
 });
 
 let newBTN = document.querySelector("#newBTN");
-newBTN.addEventListener("click", () => operateUI("#configPanel", showPanel));
-
-let backBTN = document.querySelector("#backBTN");
-backBTN.addEventListener("click", () => {
-  newBTN.click();
+newBTN.addEventListener("click", () => {
+  operateUI("#configPanel", showPanel);
   setStatus("设置番茄任务");
 });
+
+let backBTN = document.querySelector("#backBTN");
+backBTN.addEventListener("click", () => newBTN.click());
 
 let startBTN = document.querySelector("#startBTN");
 startBTN.addEventListener("click", () => {
@@ -29,6 +29,7 @@ startBTN.addEventListener("click", () => {
     showSummary(true);
   };
   let isAbsorbing = false;
+  let taskName = document.querySelector("#taskName").value;
   let finishedPomodoro = 0;
   let timeRemainControl = document.querySelector("#remainingTime");
   let finishedPomodoroControl = document.querySelector("#finishedPomodoro");
@@ -47,14 +48,14 @@ startBTN.addEventListener("click", () => {
   function executeTimingCycle() {
     isAbsorbing = !isAbsorbing;
     if (isAbsorbing) {
-      setStatus("专注中");
+      setStatus("专注中" + `${taskName ? ` - ${taskName}` : ""}`);
       audioCues("start");
       finishTime = absorbTime + Date.now();
       cycleTimerId = setTimeout(executeTimingCycle, absorbTime);
     } else {
       finishTime = restTime + Date.now();
       finishedPomodoro++;
-      setStatus("休息中");
+      setStatus("休息中" + `${taskName ? ` - ${taskName}` : ""}`);
       if (finishedPomodoro == totalPomodoro) {
         clearInterval(countdownTimerId);
         stopTime = Date.now();
