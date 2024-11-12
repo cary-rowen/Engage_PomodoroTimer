@@ -12,7 +12,7 @@
 3. 随后进行短暂的休息（5分钟左右）。
 
 ### 使用指南
-1. 在浏览器上打开 [https://timer.enabc.net][timer]；
+1. 在浏览器上打开 [https://cary-rowen.github.io/Engage_PomodoroTimer][timer]；
 2. 点击“新建计时工作流”按钮；
 3. 分别设置“专注时长”、“休息时长”和“预计番茄个数”，然后点击“开始工作”按钮；
 4. 专注过程中可以点击“停止”按钮以放弃正在进行的任务计时。
@@ -51,4 +51,4 @@ https://user-images.githubusercontent.com/21048245/184646640-d29a5482-885c-4d5e-
 
 
 
-[timer]: https://timer.enabc.net
+[timer]: https://cary-rowen.github.io/Engage_PomodoroTimer
